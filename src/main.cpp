@@ -2,62 +2,49 @@
 #include <SPI.h>
 #include <mcp2515.h>
 
+# define CAN_CS   6
 
 struct can_frame frametable[] =
 {
   {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
   {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
   {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}}
-
+  {0, 0, {0, 0, 0, 0, 0, 0, 0, 0}}
 };
-struct can_frame canMsg1;
-struct can_frame canMsg2;
-MCP2515 mcp2515(10);
 
 
-void setup() {
+MCP2515 mcp2515(CAN_CS);
 
-  canMsg1.can_id  = 0x0F6;
-  canMsg1.can_dlc = 8;
-  canMsg1.data[0] = 0x8E;
-  canMsg1.data[1] = 0x87;
-  canMsg1.data[2] = 0x32;
-  canMsg1.data[3] = 0xFA;
-  canMsg1.data[4] = 0x26;
-  canMsg1.data[5] = 0x8E;
-  canMsg1.data[6] = 0xBE;
-  canMsg1.data[7] = 0x86;
 
-  canMsg2.can_id  = 0x036;
-  canMsg2.can_dlc = 8;
-  canMsg2.data[0] = 0x0E;
-  canMsg2.data[1] = 0x00;
-  canMsg2.data[2] = 0x00;
-  canMsg2.data[3] = 0x08;
-  canMsg2.data[4] = 0x01;
-  canMsg2.data[5] = 0x00;
-  canMsg2.data[6] = 0x00;
-  canMsg2.data[7] = 0xA0;
-  
-  while (!Serial);
+void setup()
+{
+//  while (!Serial);
   Serial.begin(115200);
   SPI.begin();
   
   mcp2515.reset();
-  mcp2515.setBitrate(CAN_125KBPS);
+  mcp2515.setBitrate(CAN_100KBPS);
   mcp2515.setNormalMode();
-  
-  Serial.println("Example: Write to CAN");
-}
+  }
 
-void loop() {
-  
-  mcp2515.sendMessage(&canMsg1);
-  mcp2515.sendMessage(&canMsg2);
+void loop()
+{  
+  int i;
+
+  for (i = 0; frametable[i].can_id != 0; i++)
+  {
+    mcp2515.sendMessage(&(frametable[i]));
+    delay (100);
+  }
 
   Serial.println("Messages sent");
-  
-  delay(100);
 
+  // sleep for 2 secs for now (approx. depending on stars constellations positioning, wind velocity, and air humidity ... XD)  
+  delay(2000);
 }
