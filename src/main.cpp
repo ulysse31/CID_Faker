@@ -29,7 +29,7 @@ void setup()
   SPI.begin();
   
   mcp2515.reset();
-  mcp2515.setBitrate(CAN_100KBPS);
+  mcp2515.setBitrate(CAN_100KBPS, MCP_8MHZ);
   mcp2515.setNormalMode();
   }
 
