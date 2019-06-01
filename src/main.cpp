@@ -2,7 +2,8 @@
 #include <SPI.h>
 #include <mcp2515.h>
 
-# define CAN_CS   6
+# define CAN_CS   5
+# define LED      17
 
 struct can_frame frametable[] =
 {
@@ -31,19 +32,21 @@ void setup()
   mcp2515.reset();
   mcp2515.setBitrate(CAN_100KBPS, MCP_8MHZ);
   mcp2515.setNormalMode();
-  }
+  pinMode(LED, OUTPUT);
+}
 
 void loop()
 {  
   int i;
-
+  digitalWrite(LED, LOW);
   for (i = 0; frametable[i].can_id != 0; i++)
   {
     mcp2515.sendMessage(&(frametable[i]));
+    digitalWrite(LED, (i % 2 ? HIGH : LOW));
     delay (100);
   }
 
-  Serial.println("Messages sent");
+//  Serial.println("Messages sent");
 
   // sleep for 2 secs for now (approx. depending on stars constellations positioning, wind velocity, and air humidity ... XD)  
   delay(2000);
