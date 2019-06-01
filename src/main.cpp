@@ -94,6 +94,7 @@ void Error_loop(uint8_t count, uint8_t time)
     digitalWrite(LED, HIGH);
     delay(time);
   }
+    digitalWrite(LED, LOW);
 }
 
 void setup()
@@ -125,7 +126,6 @@ void loop()
   }
   if (timeout == MAX_TX_ERRS)
     Error_loop(42, 20);
-
   // sleep for 2 secs for now (approx. depending on stars constellations positioning, wind velocity, and air humidity ... XD)  
   delay(2000);
 }
