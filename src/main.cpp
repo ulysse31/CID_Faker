@@ -51,12 +51,11 @@ void setup()
 
   while (!(CANDEV.begin(MCP_ANY, CAN_100KBPS, MCP_8MHZ) == CAN_OK))
     Error_loop(5, 2000);
-  CANDEV.setMode(MCP_NORMAL);   // Change to normal mode to allow messages to be transmitted
+  CANDEV.setMode(MCP_NORMAL);
 }
 
 void loop()
 {
-  // send data:  ID = 0x100, Standard CAN Frame, Data length = 8 bytes, 'data' = array of data bytes to send
   uint8_t i;
   uint8_t timeout;
   digitalWrite(LED, LOW);
