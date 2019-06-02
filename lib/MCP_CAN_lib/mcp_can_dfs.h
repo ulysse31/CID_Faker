@@ -42,7 +42,7 @@
 /*
  *   Begin mt
  */
-#define TIMEOUTVALUE    50
+#define TIMEOUTVALUE    100
 #define MCP_SIDH        0
 #define MCP_SIDL        1
 #define MCP_EID8        2

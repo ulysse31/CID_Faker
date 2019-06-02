@@ -4,34 +4,33 @@
 
 # define CAN_CS   5
 # define LED      17
-# define MAX_TX_ERRS 10
+# define MAX_TX_ERRS 3
 
-typedef struct  canpacket
+typedef struct      canpacket
 {
-  uint32_t      id;
-  uint8_t       ext;
-  uint8_t       len;
-  uint8_t       data[8];
-}               t_canpacket;
+  unsigned long     id;
+  uint8_t           len;
+  uint8_t           data[8];
+}                   t_canpacket;
 
 t_canpacket packettable[] =
 {
-  {0x33a, 0, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-  {0x33a, 0, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x4f3, 0, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-  {0x33a, 0, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-  {0, 0, 0, {0, 0, 0, 0, 0, 0, 0, 0}}
+  {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
+  {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+  {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
+  {0, 0, {0, 0, 0, 0, 0, 0, 0, 0}}
 };
 
 
 MCP_CAN CANDEV(CAN_CS);
 
-void Error_loop(uint8_t count, uint8_t time)
+void Error_loop(uint8_t count, uint16_t time)
 {
   uint8_t i;
 
@@ -48,31 +47,49 @@ void Error_loop(uint8_t count, uint8_t time)
 void setup()
 {
   pinMode(LED, OUTPUT);
+  Serial.begin(115200);
 
   while (!(CANDEV.begin(MCP_ANY, CAN_100KBPS, MCP_8MHZ) == CAN_OK))
-    Error_loop(5, 2000);
+    {
+      Error_loop(5, 2000);
+      Serial.println("Error Initializing CAN DEVICE...");
+    }
   CANDEV.setMode(MCP_NORMAL);
 }
 
 void loop()
 {
-  uint8_t i;
-  uint8_t timeout;
+  uint8_t i = 0;
+  uint8_t timeout = 0;
+
   digitalWrite(LED, LOW);
-  for (timeout = 0, i = 0; packettable[i].id != 0 && timeout < MAX_TX_ERRS; i++)
+
+  while (packettable[i].id != 0)
   {
-    byte sndStat = CANDEV.sendMsgBuf(packettable[i].id, packettable[i].ext, packettable[i].len, packettable[i].data);
-    if (sndStat == CAN_OK)
+    byte sndStat = CANDEV.sendMsgBuf(packettable[i].id, packettable[i].len, packettable[i].data);
+    if(sndStat == CAN_OK)
+    {
       digitalWrite(LED, (i % 2 ? HIGH : LOW));
+      Serial.println("Message Sent Successfully!");
+      timeout = 0;
+      i++;
+    }
     else
-      {
-        i--;
-        timeout++;
-      }
+    {
+      digitalWrite(LED, LOW);
+      Serial.println("Error Sending Message...");
+     timeout++;
+    }
     delay (100);
+    if (timeout >= MAX_TX_ERRS)
+      {
+        Serial.println("Giving up this packet, going to next one");
+        i++;
+        timeout = 0;
+      }
   }
-  if (timeout == MAX_TX_ERRS)
-    Error_loop(42, 20);
+//  if (timeout == MAX_TX_ERRS)
+//    Error_loop(42, 20);
   // sleep for 2 secs for now (approx. depending on stars constellations positioning, wind velocity, and air humidity ... XD)  
   delay(2000);
 }
