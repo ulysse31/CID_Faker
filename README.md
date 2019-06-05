@@ -26,4 +26,8 @@ All the main job will be to find the right messages, their combinations and timi
 
 
 Project uses platformIO for easy compilation and development.
-For now, I'm using a Pro Micro board 5V@16Mhz.
+
+For now, I'm using a Pro Micro board 5V@16Mhz, and a well known MCP2515 CAN Controller module, more precisely the
+MCP2515 CAN controller with a 8Mhz oscillator and TJA1050 CAN transceiver.
+
+
