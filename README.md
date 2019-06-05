@@ -29,8 +29,10 @@ For now, I'm using a Pro Micro board 5V@16Mhz, and a well known MCP2515 CAN Cont
 MCP2515 CAN controller with a 8Mhz oscillator and TJA1050 CAN transceiver.
 
 You'll find on "Hardware" folder 2 types of designs :
+
        - USB_Powered : this light version aims to be connected to the Android HU on its USB port, allowing it to be
        	 powered up once the Android is up (key car inserted), and powered off when Android goes of (key car taken out)
+
        - Standalone : this version aims to be more "unrelated" the the Android HU, it is up the user to find a power
          cable source from the car (preferrably, a source that is NOT always on ...)
 
