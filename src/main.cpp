@@ -24,21 +24,6 @@ typedef struct	framecycle
 
 t_canpacket status = {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}};
 t_canpacket network = {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}};
-
-t_canpacket packettable[] =
-  {
-    {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-    {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-    {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
-    {0, 0, {0, 0, 0, 0, 0, 0, 0, 0}}
-  };
-
 t_framecycle	framecycletable[] = 
   {
     {true, 0, 10000, &status},
@@ -65,7 +50,34 @@ void Error_loop(uint8_t count, uint16_t time)
     digitalWrite(LED, LOW);
 }
 
-void	send_packet()
+bool		send_packet(INT32U id, INT8U len, INT8U *data)
+{
+  uint8_t	i = 0;
+  uint8_t	timeout = 0;
+
+  while (timeout <= MAX_TX_ERRS)
+    {
+      byte sndStat = CANDEV.sendMsgBuf(id, len, data);
+
+      if(sndStat == CAN_OK)
+	{
+	  Serial.println("Message Sent Successfully!");
+	  break ;
+	}
+      else
+	{
+	  Serial.println("Error Sending Message...");
+	  timeout++;
+	}
+    }
+  if (timeout >= MAX_TX_ERRS)
+    {
+      Serial.println("Giving up this packet, going to next one");
+      return (false);
+    }
+  else
+    return (true);
+}
 
 void setup()
 {
@@ -83,46 +95,31 @@ void setup()
 
 void loop()
 {
-  uint8_t i = 0;
-  uint8_t timeout = 0;
-
-  digitalWrite(LED, LOW);
-
+  uint8_t i;
+  bool sent;
   
-  while (framecycletable[i].packet)
+  digitalWrite(LED, LOW);
+  for (i = 0, sent = false; framecycletable[i].packet; i++)
     if (framecycletable[i].firstrun == true)
       {
 	if ((inittime + framecycletable[i].start) >= millis())
 	  {
-
+	    sent = send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data);
+	    framecycletable[i].start = millis();
+	    framecycletable[i].firstrun = false;
+	    if (sent)
+	      digitalWrite(LED, (i % 2 ? HIGH : LOW));
 	  }
       }
-//   while (packettable[i].id != 0)
-//   {
-//     byte sndStat = CANDEV.sendMsgBuf(packettable[i].id, packettable[i].len, packettable[i].data);
-//     if(sndStat == CAN_OK)
-//     {
-//       digitalWrite(LED, (i % 2 ? HIGH : LOW));
-//       Serial.println("Message Sent Successfully!");
-//       timeout = 0;
-//       i++;
-//     }
-//     else
-//     {
-//       digitalWrite(LED, LOW);
-//       Serial.println("Error Sending Message...");
-//      timeout++;
-//     }
-//     delay (100);
-//     if (timeout >= MAX_TX_ERRS)
-//       {
-//         Serial.println("Giving up this packet, going to next one");
-//         i++;
-//         timeout = 0;
-//       }
-//   }
-// //  if (timeout == MAX_TX_ERRS)
-// //    Error_loop(42, 20);
-//   // sleep for 2 secs for now (approx. depending on stars constellations positioning, wind velocity, and air humidity ... XD)  
-//   delay(2000);
+    else
+      {
+	if ((framecycletable[i].start + framecycletable[i].cycletime) >= millis())
+	  {
+	    sent = send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data);
+	    framecycletable[i].start = millis();
+	    if (sent)
+	      digitalWrite(LED, (i % 2 ? HIGH : LOW));
+	  }
+      }
+  delay(5);
 }
