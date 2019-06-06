@@ -24,6 +24,7 @@ typedef struct	framecycle
 
 t_canpacket status = {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}};
 t_canpacket network = {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}};
+
 t_framecycle	framecycletable[] = 
   {
     {true, 0, 10000, &status},
@@ -66,7 +67,7 @@ bool		send_packet(INT32U id, INT8U len, INT8U *data)
 	}
       else
 	{
-	  Serial.println("Error Sending Message...");
+	  Serial.println("Error Sending Message... Retrying ...");
 	  timeout++;
 	}
     }
@@ -96,30 +97,27 @@ void setup()
 void loop()
 {
   uint8_t i;
-  bool sent;
   
   digitalWrite(LED, LOW);
   for (i = 0, sent = false; framecycletable[i].packet; i++)
     if (framecycletable[i].firstrun == true)
       {
 	if ((inittime + framecycletable[i].start) >= millis())
-	  {
-	    sent = send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data);
-	    framecycletable[i].start = millis();
-	    framecycletable[i].firstrun = false;
-	    if (sent)
-	      digitalWrite(LED, (i % 2 ? HIGH : LOW));
-	  }
+	  if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
+	      {
+		framecycletable[i].start = millis();
+		framecycletable[i].firstrun = false;
+		digitalWrite(LED, (i % 2 ? HIGH : LOW));
+	      }
       }
     else
       {
 	if ((framecycletable[i].start + framecycletable[i].cycletime) >= millis())
-	  {
-	    sent = send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data);
-	    framecycletable[i].start = millis();
-	    if (sent)
+	  if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
+	    {
+	      framecycletable[i].start = millis();
 	      digitalWrite(LED, (i % 2 ? HIGH : LOW));
-	  }
+	    }
       }
   delay(5);
 }
