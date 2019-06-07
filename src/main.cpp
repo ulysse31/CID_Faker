@@ -35,18 +35,6 @@ t_framecycle	framecycletable[] =
     {0, 0, 0}
   };
 
-/* 
-// DEBUG VALUES
-t_framecycle	framecycletable[] = 
-  {
-    {0, 10030, &status},
-    {1600, 10030, &status},
-    {3800, 10030, &status},
-    {0, 9400, &network},
-    {0, 0, NULL}
-  };
-*/
-
 MCP_CAN CANDEV(CAN_CS);
 
 void Error_loop(uint8_t count, uint16_t time)
