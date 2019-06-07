@@ -1,0 +1,150 @@
+
+(session CID_Faker.ses
+  (base_design CID_Faker.dsn)
+  (placement
+    (resolution um 10)
+    (component Socket_Strips:Socket_Strip_Straight_1x07_Pitch2.54mm
+      (place J2 1270000 -1223010 back 90)
+    )
+    (component promicro:ProMicro
+      (place U1 1346200 -1052830 front 90)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version 4.0.7)
+    )
+    (library_out 
+      (padstack "Via[0-1]_600:400_um"
+        (shape
+          (circle F.Cu 6000 0 0)
+        )
+        (shape
+          (circle B.Cu 6000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+      (net GND
+        (wire
+          (path B.Cu 5000
+            1397000 -1209510
+            1397000 -1208149
+            1355981 -1167130
+            1270000 -1167130
+          )
+        )
+        (wire
+          (path F.Cu 5000
+            1422400 -1141730
+            1397000 -1167130
+            1397000 -1223010
+          )
+        )
+        (wire
+          (path F.Cu 5000
+            1422400 -1116330
+            1422400 -1141730
+          )
+        )
+        (wire
+          (path B.Cu 5000
+            1397000 -1223010
+            1397000 -1209510
+          )
+        )
+      )
+      (net INT
+        (wire
+          (path B.Cu 5000
+            1377826 -1199587
+            1293423 -1199587
+            1270000 -1223010
+          )
+        )
+        (via "Via[0-1]_600:400_um" 1377826 -1199587
+        )
+        (wire
+          (path F.Cu 5000
+            1422400 -1090930
+            1377826 -1135504
+            1377826 -1199587
+          )
+        )
+      )
+      (net SCK
+        (wire
+          (path F.Cu 5000
+            1270000 -989330
+            1295400 -1014730
+            1295400 -1223010
+          )
+        )
+      )
+      (net MOSI
+        (wire
+          (path F.Cu 5000
+            1320800 -1223010
+            1320800 -1209510
+          )
+        )
+        (wire
+          (path F.Cu 5000
+            1309807 -1009783
+            1309807 -1198517
+            1320800 -1209510
+          )
+        )
+        (via "Via[0-1]_600:400_um" 1309807 -1009783
+        )
+        (wire
+          (path B.Cu 5000
+            1270000 -938530
+            1309807 -978337
+            1309807 -1009783
+          )
+        )
+      )
+      (net MISO
+        (wire
+          (path F.Cu 5000
+            1346200 -1223010
+            1346200 -1035564
+            1274566 -963930
+            1270000 -963930
+          )
+        )
+      )
+      (net CS
+        (wire
+          (path F.Cu 5000
+            1371600 -1223010
+            1371600 -1209510
+          )
+        )
+        (wire
+          (path F.Cu 5000
+            1422400 -1014730
+            1370202 -1066928
+            1370202 -1208112
+            1371600 -1209510
+          )
+        )
+      )
+      (net VCC
+        (wire
+          (path B.Cu 5000
+            1270000 -1116330
+            1315720 -1116330
+            1422400 -1223010
+          )
+        )
+      )
+    )
+  )
+)

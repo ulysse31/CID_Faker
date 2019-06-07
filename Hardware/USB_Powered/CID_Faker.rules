@@ -11,7 +11,7 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 52)
+    (start_pass_no 112)
     (layer_rule F.Cu
       (active on)
       (preferred_direction vertical)
@@ -63,8 +63,7 @@
     )
   )
   (class "kicad_default"
-    GND INT SCK MOSI MISO CS VCC VIN
-    RAW
+    GND INT SCK MOSI MISO CS VCC
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule

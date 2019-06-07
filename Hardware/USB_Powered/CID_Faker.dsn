@@ -1,0 +1,173 @@
+(pcb /Users/nix/Documents/PlatformIO/Projects/CID_Faker/Hardware/USB_Powered/CID_Faker.dsn
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "4.0.7")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  143891 -90043  125349 -90043  125349 -124079  143891 -124079
+            143891 -90043  143891 -90043)
+    )
+    (via "Via[0-1]_600:400_um")
+    (rule
+      (width 500)
+      (clearance 200.1)
+      (clearance 200.1 (type default_smd))
+      (clearance 50 (type smd_smd))
+    )
+  )
+  (placement
+    (component Socket_Strips:Socket_Strip_Straight_1x07_Pitch2.54mm
+      (place J2 127000 -122301 back 90 (PN CAN))
+    )
+    (component promicro:ProMicro
+      (place U1 134620 -105283 front 90 (PN ProMicro))
+    )
+  )
+  (library
+    (image Socket_Strips:Socket_Strip_Straight_1x07_Pitch2.54mm
+      (outline (path signal 100  -1270 1270  -1270 -16510))
+      (outline (path signal 100  -1270 -16510  1270 -16510))
+      (outline (path signal 100  1270 -16510  1270 1270))
+      (outline (path signal 100  1270 1270  -1270 1270))
+      (outline (path signal 120  -1330 -1270  -1330 -16570))
+      (outline (path signal 120  -1330 -16570  1330 -16570))
+      (outline (path signal 120  1330 -16570  1330 -1270))
+      (outline (path signal 120  1330 -1270  -1330 -1270))
+      (outline (path signal 120  -1330 0  -1330 1330))
+      (outline (path signal 120  -1330 1330  0 1330))
+      (outline (path signal 50  -1800 1800  -1800 -17050))
+      (outline (path signal 50  -1800 -17050  1800 -17050))
+      (outline (path signal 50  1800 -17050  1800 1800))
+      (outline (path signal 50  1800 1800  -1800 1800))
+      (pin Rect[A]Pad_1700x1700_um 1 0 0)
+      (pin Oval[A]Pad_1700x1700_um 2 0 -2540)
+      (pin Oval[A]Pad_1700x1700_um 3 0 -5080)
+      (pin Oval[A]Pad_1700x1700_um 4 0 -7620)
+      (pin Oval[A]Pad_1700x1700_um 5 0 -10160)
+      (pin Oval[A]Pad_1700x1700_um 6 0 -12700)
+      (pin Oval[A]Pad_1700x1700_um 7 0 -15240)
+    )
+    (image promicro:ProMicro
+      (outline (path signal 150  15240 8890  15240 -8890))
+      (outline (path signal 150  15240 -8890  -15240 -8890))
+      (outline (path signal 150  -15240 -8890  -15240 -3810))
+      (outline (path signal 150  -15240 -3810  -17780 -3810))
+      (outline (path signal 150  -17780 -3810  -17780 3810))
+      (outline (path signal 150  -17780 3810  -15240 3810))
+      (outline (path signal 150  -15240 3810  -15240 8890))
+      (outline (path signal 150  -15240 8890  15240 8890))
+      (outline (path signal 150  -15240 -8890  15240 -8890))
+      (outline (path signal 150  -15240 -8890  -15240 -3810))
+      (outline (path signal 150  -15240 -3810  -17780 -3810))
+      (outline (path signal 150  -17780 -3810  -17780 3810))
+      (outline (path signal 150  -17780 3810  -15240 3810))
+      (outline (path signal 150  -15240 3810  -15240 8890))
+      (outline (path signal 150  -15240 8890  15240 8890))
+      (outline (path signal 150  15240 8890  15240 -8890))
+      (pin Rect[A]Pad_1600x1600_um 1 -13970 -7620)
+      (pin Round[A]Pad_1600_um 2 -11430 -7620)
+      (pin Round[A]Pad_1600_um 3 -8890 -7620)
+      (pin Round[A]Pad_1600_um 4 -6350 -7620)
+      (pin Round[A]Pad_1600_um 5 -3810 -7620)
+      (pin Round[A]Pad_1600_um 6 -1270 -7620)
+      (pin Round[A]Pad_1600_um 7 1270 -7620)
+      (pin Round[A]Pad_1600_um 8 3810 -7620)
+      (pin Round[A]Pad_1600_um 9 6350 -7620)
+      (pin Round[A]Pad_1600_um 10 8890 -7620)
+      (pin Round[A]Pad_1600_um 11 11430 -7620)
+      (pin Round[A]Pad_1600_um 12 13970 -7620)
+      (pin Round[A]Pad_1600_um 13 13970 7620)
+      (pin Round[A]Pad_1600_um 14 11430 7620)
+      (pin Round[A]Pad_1600_um 15 8890 7620)
+      (pin Round[A]Pad_1600_um 16 6350 7620)
+      (pin Round[A]Pad_1600_um 17 3810 7620)
+      (pin Round[A]Pad_1600_um 18 1270 7620)
+      (pin Round[A]Pad_1600_um 19 -1270 7620)
+      (pin Round[A]Pad_1600_um 20 -3810 7620)
+      (pin Round[A]Pad_1600_um 21 -6350 7620)
+      (pin Round[A]Pad_1600_um 22 -8890 7620)
+      (pin Round[A]Pad_1600_um 23 -11430 7620)
+      (pin Round[A]Pad_1600_um 24 -13970 7620)
+    )
+    (padstack Round[A]Pad_1600_um
+      (shape (circle F.Cu 1600))
+      (shape (circle B.Cu 1600))
+      (attach off)
+    )
+    (padstack Oval[A]Pad_1700x1700_um
+      (shape (path F.Cu 1700  0 0  0 0))
+      (shape (path B.Cu 1700  0 0  0 0))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1600x1600_um
+      (shape (rect F.Cu -800 -800 800 800))
+      (shape (rect B.Cu -800 -800 800 800))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1700x1700_um
+      (shape (rect F.Cu -850 -850 850 850))
+      (shape (rect B.Cu -850 -850 850 850))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:400_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+  )
+  (network
+    (net GND
+      (pins J2-6 U1-3 U1-4 U1-23)
+    )
+    (net INT
+      (pins J2-1 U1-5)
+    )
+    (net SCK
+      (pins J2-2 U1-16)
+    )
+    (net MOSI
+      (pins J2-3 U1-14)
+    )
+    (net MISO
+      (pins J2-4 U1-15)
+    )
+    (net CS
+      (pins J2-5 U1-8)
+    )
+    (net VCC
+      (pins J2-7 U1-21)
+    )
+    (class kicad_default "" CS GND INT MISO MOSI "Net-(U1-Pad1)" "Net-(U1-Pad10)"
+      "Net-(U1-Pad11)" "Net-(U1-Pad12)" "Net-(U1-Pad13)" "Net-(U1-Pad17)"
+      "Net-(U1-Pad18)" "Net-(U1-Pad19)" "Net-(U1-Pad2)" "Net-(U1-Pad20)" "Net-(U1-Pad22)"
+      "Net-(U1-Pad24)" "Net-(U1-Pad6)" "Net-(U1-Pad7)" "Net-(U1-Pad9)" RAW
+      SCK VCC VIN
+      (circuit
+        (use_via Via[0-1]_600:400_um)
+      )
+      (rule
+        (width 500)
+        (clearance 200.1)
+      )
+    )
+  )
+  (wiring
+  )
+)

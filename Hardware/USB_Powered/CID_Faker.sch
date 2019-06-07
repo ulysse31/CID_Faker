@@ -44,7 +44,6 @@ LIBS:Regulator_Linear
 LIBS:references
 LIBS:sensors
 LIBS:stm32
-LIBS:CID_Faker-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -70,25 +69,10 @@ F 3 "" H 3700 1800 60  0000 C CNN
 	1    3600 2850
 	1    0    0    -1  
 $EndComp
-Text GLabel 5250 3100 0    60   Input ~ 0
-GND
-Text GLabel 5250 3000 0    60   Input ~ 0
-VIN
 Text GLabel 3600 1300 1    60   Input ~ 0
 MISO
 Text GLabel 3700 1300 1    60   Input ~ 0
 MOSI
-$Comp
-L Conn_01x02_Male J1
-U 1 1 5CEFFD1E
-P 5450 3100
-F 0 "J1" H 5450 3200 50  0000 C CNN
-F 1 "PWR" H 5450 2900 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x02_Pitch2.54mm" H 5450 3100 50  0001 C CNN
-F 3 "" H 5450 3100 50  0001 C CNN
-	1    5450 3100
-	-1   0    0    1   
-$EndComp
 $Comp
 L Conn_01x07_Female J2
 U 1 1 5CEFFEED
@@ -110,8 +94,6 @@ Text GLabel 4300 2400 2    60   Input ~ 0
 VCC
 Text GLabel 4300 2200 2    60   Input ~ 0
 GND
-Text GLabel 4600 1650 0    60   Input ~ 0
-VIN
 Text GLabel 3900 1300 1    60   Input ~ 0
 INT
 Text GLabel 3800 1300 1    60   Input ~ 0
@@ -144,21 +126,5 @@ NoConn ~ 2900 3000
 NoConn ~ 2900 3100
 NoConn ~ 2900 3200
 NoConn ~ 4300 3200
-$Comp
-L LF80_TO220 U2
-U 1 1 5CF0100D
-P 4900 1650
-F 0 "U2" H 4750 1775 50  0000 C CNN
-F 1 "LF80_TO220" H 4900 1775 50  0000 L CNN
-F 2 "Power_Integrations:TO-220" H 4900 1875 50  0001 C CIN
-F 3 "" H 4900 1600 50  0001 C CNN
-	1    4900 1650
-	1    0    0    -1  
-$EndComp
-Text GLabel 4300 2100 2    60   Input ~ 0
-RAW
-Text GLabel 5200 1650 2    60   Input ~ 0
-RAW
-Text GLabel 4900 1950 3    60   Input ~ 0
-GND
+NoConn ~ 4300 2100
 $EndSCHEMATC
