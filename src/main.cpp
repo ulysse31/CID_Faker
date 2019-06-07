@@ -25,13 +25,26 @@ typedef struct	framecycle
 t_canpacket status = {0x33a, 5, {0x30, 0x82, 0x81, 0x0a, 0x7f, 0, 0, 0}};
 t_canpacket network = {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}};
 
+/*
+// PROD VALUES
 t_framecycle	framecycletable[] = 
   {
     {true, 0, 10000, &status},
-    {true, 200, 10000, &status},
-    {true, 400, 10000, &status},
+    {true, 160, 10000, &status},
+    {true, 380, 10000, &status},
     {true, 0, 940, &network},
     {true, 0, 0, 0}
+  };
+*/
+
+// DEBUG VALUES
+t_framecycle	framecycletable[] = 
+  {
+    {true, 0, 10000, &status},
+    {true, 1600, 10000, &status},
+    {true, 3800, 10000, &status},
+    {true, 0, 9400, &network},
+    {true, 0, 0, NULL}
   };
 
 unsigned long inittime;
@@ -99,7 +112,7 @@ void loop()
   uint8_t i;
   
   digitalWrite(LED, LOW);
-  for (i = 0, sent = false; framecycletable[i].packet; i++)
+  for (i = 0; framecycletable[i].packet != NULL; i++)
     if (framecycletable[i].firstrun == true)
       {
 	if ((inittime + framecycletable[i].start) >= millis())
@@ -107,7 +120,7 @@ void loop()
 	      {
 		framecycletable[i].start = millis();
 		framecycletable[i].firstrun = false;
-		digitalWrite(LED, (i % 2 ? HIGH : LOW));
+		digitalWrite(LED, (i % 2 ? LOW : HIGH));
 	      }
       }
     else
@@ -116,7 +129,7 @@ void loop()
 	  if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
 	    {
 	      framecycletable[i].start = millis();
-	      digitalWrite(LED, (i % 2 ? HIGH : LOW));
+	      digitalWrite(LED, (i % 2 ? LOW : HIGH));
 	    }
       }
   delay(5);
