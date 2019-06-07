@@ -66,7 +66,6 @@ void Error_loop(uint8_t count, uint16_t time)
 
 bool		send_packet(INT32U id, INT8U len, INT8U *data)
 {
-  uint8_t	i = 0;
   uint8_t	timeout = 0;
 
   while (timeout <= MAX_TX_ERRS)
