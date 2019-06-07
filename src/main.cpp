@@ -80,7 +80,7 @@ void            setup()
   unsigned long inittime;
 
   pinMode(LED, OUTPUT);
-  while (!(CANDEV.begin(MCP_ANY, CAN_100KBPS, MCP_8MHZ) == CAN_OK))
+  while (CANDEV.begin(MCP_ANY, CAN_100KBPS, MCP_8MHZ) != CAN_OK)
     Error_loop(5, 2000);
   CANDEV.setMode(MCP_NORMAL);
   inittime = millis();
