@@ -29,9 +29,9 @@ t_canpacket network = {0x4f3, 8, {0x78, 0x42, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 // PROD VALUES
 t_framecycle	framecycletable[] = 
   {
-    {true, 0, 10000, &status},
-    {true, 160, 10000, &status},
-    {true, 380, 10000, &status},
+    {true, 0, 10030, &status},
+    {true, 160, 10030, &status},
+    {true, 380, 10030, &status},
     {true, 0, 940, &network},
     {true, 0, 0, 0}
   };
@@ -40,9 +40,9 @@ t_framecycle	framecycletable[] =
 // DEBUG VALUES
 t_framecycle	framecycletable[] = 
   {
-    {true, 0, 10000, &status},
-    {true, 1600, 10000, &status},
-    {true, 3800, 10000, &status},
+    {true, 0, 10030, &status},
+    {true, 1600, 10030, &status},
+    {true, 3800, 10030, &status},
     {true, 0, 9400, &network},
     {true, 0, 0, NULL}
   };
