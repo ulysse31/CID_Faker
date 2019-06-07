@@ -95,10 +95,10 @@ void loop()
   digitalWrite(LED, LOW);
   for (i = 0; framecycletable[i].packet != NULL; i++)
     if ((framecycletable[i].start + framecycletable[i].cycletime) <= millis())
-      if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
-        {
-          framecycletable[i].start = framecycletable[i].start + framecycletable[i].cycletime;
+      {
+        if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
           digitalWrite(LED, (i % 2 ? LOW : HIGH));
-        }
+        framecycletable[i].start = framecycletable[i].start + framecycletable[i].cycletime;
+      }
   delay(5);
 }
