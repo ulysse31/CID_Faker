@@ -98,7 +98,8 @@ void loop()
 {
   digitalWrite(LED, LOW);
   for (uint8_t i = 0; framecycletable[i].packet != NULL; i++)
-    if ((framecycletable[i].start + framecycletable[i].cycletime) <= millis())
+    if ((framecycletable[i].start) <= millis())
+//    if ((framecycletable[i].start + framecycletable[i].cycletime) <= millis())
       {
         if (send_packet(framecycletable[i].packet->id, framecycletable[i].packet->len, framecycletable[i].packet->data) == true)
           digitalWrite(LED, (i % 2 ? LOW : HIGH));
