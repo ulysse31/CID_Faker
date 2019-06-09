@@ -23,13 +23,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   state of the motorized screen (opening/opened/closing/closed).
   This code makes the arduino send both id messages with the same timings that
   with the original screen, simulating its presence on the CAN bus network of
-  the car.
+  the car:
   - 0x33a (status) is sent by 3 packets separated by 160ms, and repeated each
     10030ms.
   - 0x4f3 (network) is sent regularly each 940ms.
   These values/refresh rates where observed in my car (BMW e87 from 2005).
-  The code was made with the goal to be able to keep the possibility modify easily
-  the rates, timings and packet type to inject.
+  The code was made with the goal to be able to modify easily the rates,
+  timings and packet type to inject.
   To change rates and timings, simply read and edit framcecycletable.
   To add new packet type, declare a new t_canpacket, and add its pointer with its
   rate and timing to the framcecycletable.
