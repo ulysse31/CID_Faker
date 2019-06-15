@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:CID_Faker-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -26,8 +25,6 @@ Text GLabel 3300 1300 1    60   Input ~ 0
 VCC
 Text GLabel 4300 2400 2    60   Input ~ 0
 VCC
-Text GLabel 4300 2200 2    60   Input ~ 0
-GND
 Text GLabel 3900 1300 1    60   Input ~ 0
 INT
 Text GLabel 3800 1300 1    60   Input ~ 0
@@ -83,4 +80,5 @@ Text GLabel 2900 2400 0    50   Input ~ 0
 GND
 Text GLabel 2900 2300 0    50   Input ~ 0
 GND
+NoConn ~ 4300 2200
 $EndSCHEMATC

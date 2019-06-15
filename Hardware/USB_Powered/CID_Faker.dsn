@@ -3,7 +3,7 @@
     (string_quote ")
     (space_in_quoted_tokens on)
     (host_cad "KiCad's Pcbnew")
-    (host_version "4.0.7")
+    (host_version "(5.1.2-1)-1")
   )
   (resolution um 10)
   (unit um)
@@ -21,8 +21,8 @@
       )
     )
     (boundary
-      (path pcb 0  143891 -90043  125349 -90043  125349 -124079  143891 -124079
-            143891 -90043  143891 -90043)
+      (path pcb 0  143891 -124079  125349 -124079  125349 -90043  143891 -90043
+            143891 -124079)
     )
     (via "Via[0-1]_600:400_um")
     (rule
@@ -33,29 +33,30 @@
     )
   )
   (placement
-    (component Socket_Strips:Socket_Strip_Straight_1x07_Pitch2.54mm
-      (place J2 127000 -122301 back 90 (PN CAN))
+    (component Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical
+      (place J1 127000 -91440 back 90 (PN CAN1))
     )
     (component promicro:ProMicro
-      (place U1 134620 -105283 front 90 (PN ProMicro))
+      (place U1 134620 -107950 front 90 (PN ProMicro))
     )
   )
   (library
-    (image Socket_Strips:Socket_Strip_Straight_1x07_Pitch2.54mm
-      (outline (path signal 100  -1270 1270  -1270 -16510))
-      (outline (path signal 100  -1270 -16510  1270 -16510))
-      (outline (path signal 100  1270 -16510  1270 1270))
-      (outline (path signal 100  1270 1270  -1270 1270))
+    (image Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical
+      (outline (path signal 100  -1270 1270  635 1270))
+      (outline (path signal 100  635 1270  1270 635))
+      (outline (path signal 100  1270 635  1270 -16510))
+      (outline (path signal 100  1270 -16510  -1270 -16510))
+      (outline (path signal 100  -1270 -16510  -1270 1270))
+      (outline (path signal 120  -1330 -1270  1330 -1270))
       (outline (path signal 120  -1330 -1270  -1330 -16570))
       (outline (path signal 120  -1330 -16570  1330 -16570))
-      (outline (path signal 120  1330 -16570  1330 -1270))
-      (outline (path signal 120  1330 -1270  -1330 -1270))
-      (outline (path signal 120  -1330 0  -1330 1330))
-      (outline (path signal 120  -1330 1330  0 1330))
-      (outline (path signal 50  -1800 1800  -1800 -17050))
-      (outline (path signal 50  -1800 -17050  1800 -17050))
-      (outline (path signal 50  1800 -17050  1800 1800))
-      (outline (path signal 50  1800 1800  -1800 1800))
+      (outline (path signal 120  1330 -1270  1330 -16570))
+      (outline (path signal 120  1330 1330  1330 0))
+      (outline (path signal 120  0 1330  1330 1330))
+      (outline (path signal 50  -1800 1800  1750 1800))
+      (outline (path signal 50  1750 1800  1750 -17000))
+      (outline (path signal 50  1750 -17000  -1800 -17000))
+      (outline (path signal 50  -1800 -17000  -1800 1800))
       (pin Rect[A]Pad_1700x1700_um 1 0 0)
       (pin Oval[A]Pad_1700x1700_um 2 0 -2540)
       (pin Oval[A]Pad_1700x1700_um 3 0 -5080)
@@ -134,31 +135,31 @@
   )
   (network
     (net GND
-      (pins J2-6 U1-3 U1-4 U1-23)
+      (pins J1-6 U1-3 U1-4)
     )
     (net INT
-      (pins J2-1 U1-5)
+      (pins J1-1 U1-5)
     )
     (net SCK
-      (pins J2-2 U1-16)
+      (pins J1-2 U1-16)
     )
     (net MOSI
-      (pins J2-3 U1-14)
+      (pins J1-3 U1-14)
     )
     (net MISO
-      (pins J2-4 U1-15)
+      (pins J1-4 U1-15)
     )
     (net CS
-      (pins J2-5 U1-8)
+      (pins J1-5 U1-8)
     )
     (net VCC
-      (pins J2-7 U1-21)
+      (pins J1-7 U1-21)
     )
     (class kicad_default "" CS GND INT MISO MOSI "Net-(U1-Pad1)" "Net-(U1-Pad10)"
       "Net-(U1-Pad11)" "Net-(U1-Pad12)" "Net-(U1-Pad13)" "Net-(U1-Pad17)"
       "Net-(U1-Pad18)" "Net-(U1-Pad19)" "Net-(U1-Pad2)" "Net-(U1-Pad20)" "Net-(U1-Pad22)"
-      "Net-(U1-Pad24)" "Net-(U1-Pad6)" "Net-(U1-Pad7)" "Net-(U1-Pad9)" RAW
-      SCK VCC VIN
+      "Net-(U1-Pad23)" "Net-(U1-Pad24)" "Net-(U1-Pad6)" "Net-(U1-Pad7)" "Net-(U1-Pad9)"
+      SCK VCC
       (circuit
         (use_via Via[0-1]_600:400_um)
       )
