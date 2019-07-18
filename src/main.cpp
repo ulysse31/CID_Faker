@@ -69,7 +69,7 @@ t_framecycle	framecycletable[] =
     {160, 10030, &status},
     {380, 10030, &status},
     {0, 940, &network},
-    {0, 0, 0}
+    {0, 0, NULL}
   };
 
 MCP_CAN CANDEV(CAN_CS);
